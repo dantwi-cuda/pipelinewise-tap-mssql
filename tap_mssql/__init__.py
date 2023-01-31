@@ -156,12 +156,12 @@ def create_column_metadata(cols, config):
         schema = schema_for_column(c, config)
         mdata = metadata.write(
             mdata,
-            ("properties", c.column_name),
+            ("properties", c.COLUMN_NAME),
             "selected-by-default",
             schema.inclusion != "unsupported",
         )
         mdata = metadata.write(
-            mdata, ("properties", c.column_name), "sql-datatype", c.data_type.lower()
+            mdata, ("properties", c.COLUMN_NAME), "sql-datatype", c.data_type.lower()
         )
 
     return metadata.to_list(mdata)
@@ -252,7 +252,7 @@ def discover_catalog(mssql_conn, config):
             (table_schema, table_name) = k
             schema = Schema(
                 type="object",
-                properties={c.column_name: schema_for_column(c, config) for c in cols},
+                properties={c.COLUMN_NAME: schema_for_column(c, config) for c in cols},
             )
             md = create_column_metadata(cols, config)
             md_map = metadata.to_map(md)
@@ -269,7 +269,7 @@ def discover_catalog(mssql_conn, config):
 
                 md_map = metadata.write(md_map, (), "is-view", is_view)
 
-            key_properties = [c.column_name for c in cols if c.is_primary_key == 1]
+            key_properties = [c.COLUMN_NAME for c in cols if c.is_primary_key == 1]
 
             md_map = metadata.write(md_map, (), "table-key-properties", key_properties)
 
