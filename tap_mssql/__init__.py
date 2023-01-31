@@ -101,11 +101,11 @@ def schema_for_column(c, config):
 
     elif data_type in FLOAT_TYPES:
         result.type = ["null", "number"]
-        result.multipleOf = 10 ** (0 - (c.numeric_scale or 17))
+        result.multipleOf = 10 ** (0 - (c.NUMERIC_SCALE or 17))
 
     elif data_type in DECIMAL_TYPES:
         result.type = ["null", "number"]
-        result.multipleOf = 10 ** (0 - c.numeric_scale)
+        result.multipleOf = 10 ** (0 - c.NUMERIC_SCALE)
         return result
 
     elif data_type in STRING_TYPES:
