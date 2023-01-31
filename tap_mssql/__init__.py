@@ -79,7 +79,7 @@ def default_date_format():
 
 def schema_for_column(c, config):
     """Returns the Schema object for the given Column."""
-    data_type = c.data_type.lower()
+    data_type = c.DATA_TYPE.lower()
 
     inclusion = "available"
 
@@ -161,7 +161,7 @@ def create_column_metadata(cols, config):
             schema.inclusion != "unsupported",
         )
         mdata = metadata.write(
-            mdata, ("properties", c.COLUMN_NAME), "sql-datatype", c.data_type.lower()
+            mdata, ("properties", c.COLUMN_NAME), "sql-datatype", c.DATA_TYPE.lower()
         )
 
     return metadata.to_list(mdata)
