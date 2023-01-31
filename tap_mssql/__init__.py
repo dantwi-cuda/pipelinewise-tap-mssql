@@ -85,7 +85,7 @@ def schema_for_column(c, config):
 
     use_date_data_type_format = config.get("use_date_datatype") or default_date_format()
 
-    if c.is_primary_key == 1:
+    if c.IS_PRIMARY_KEY == 1:
         inclusion = "automatic"
 
     result = Schema(inclusion=inclusion)
@@ -269,7 +269,7 @@ def discover_catalog(mssql_conn, config):
 
                 md_map = metadata.write(md_map, (), "is-view", is_view)
 
-            key_properties = [c.COLUMN_NAME for c in cols if c.is_primary_key == 1]
+            key_properties = [c.COLUMN_NAME for c in cols if c.IS_PRIMARY_KEY == 1]
 
             md_map = metadata.write(md_map, (), "table-key-properties", key_properties)
 
